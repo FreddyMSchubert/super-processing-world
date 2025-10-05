@@ -1,20 +1,43 @@
 package com.frederickschubert;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main
-{
-    public static void main(String[] args)
-    {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.print("Hello and welcome!");
+import processing.core.PApplet;
 
-        for (int i = 1; i <= 5; i++)
-        {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+public class Main extends PApplet {
+
+    public static void main(String[] args) {
+        PApplet.main(Main.class.getName()); // launch processing
+    }
+
+    @Override
+    public void settings() {
+        size(500, 500);
+    }
+
+    @Override
+    public void setup() {
+        colorMode(HSB, 360, 100, 100);
+        noStroke();
+    }
+
+    @Override
+    public void draw() {
+        background(255);
+
+        // Face circle
+        fill(55, 100, 100);
+        ellipse(width / 2f, height / 2f, 380, 380);
+
+        // Eyes
+        fill(0);
+        ellipse(width * 0.38f, height * 0.40f, 40, 60);
+        ellipse(width * 0.62f, height * 0.40f, 40, 60);
+
+        // Smile
+        noFill();
+        stroke(0);
+        strokeWeight(12);
+        float cx = width / 2f;
+        float cy = height * 0.58f;
+        arc(cx, cy, 260, 220, radians(20), radians(160));
     }
 }
