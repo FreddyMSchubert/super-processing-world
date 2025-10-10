@@ -1,5 +1,6 @@
 package com.frederickschubert;
 
+import com.frederickschubert.object.GameObject;
 import processing.core.PApplet;
 
 import java.io.IOException;
@@ -19,12 +20,6 @@ public class Main extends PApplet {
     public void setup() {
         colorMode(HSB, 360, 100, 100);
         noStroke();
-        try {
-            LevelDataLoader loader = new LevelDataLoader("levels/test.lvl");
-        } catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
@@ -47,5 +42,25 @@ public class Main extends PApplet {
         float cx = width / 2f;
         float cy = height * 0.58f;
         arc(cx, cy, 260, 220, radians(20), radians(160));
+
+        // draw game
+        LevelDataLoader loader = null;
+        try
+        {
+            loader = new LevelDataLoader("levels/test.lvl");
+        } catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+        Game game = new Game(loader);
+        for (GameObject obj : game.objects) {
+            switch (obj.getClass().getSimpleName()) {
+                case "PlayerGameObject" -> fill(0, 0, 100);
+                case "WallGameObject" -> fill(0, 0, 0);
+                default -> fill(255, 0, 0);
+            }
+            noStroke();
+            rect(obj.x * 50, obj.y * 50, 50, 50);
+        }
     }
 }

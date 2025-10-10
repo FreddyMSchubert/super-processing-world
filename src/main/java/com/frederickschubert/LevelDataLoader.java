@@ -36,7 +36,15 @@ public class LevelDataLoader
         {
             for (int col = 0; col < levelData.getColumnCount(); col++)
             {
-                System.out.print(levelData.get(row, col));
+                try
+                {
+                    System.out.print(levelData.get(row, col));
+                }
+                catch (IndexOutOfBoundsException e)
+                {
+                    System.out.print(' ');
+                }
+
             }
             System.out.println();
         }
