@@ -2,6 +2,8 @@ package com.frederickschubert;
 
 import processing.core.PApplet;
 
+import java.io.IOException;
+
 public class Main extends PApplet {
 
     public static void main(String[] args) {
@@ -17,6 +19,12 @@ public class Main extends PApplet {
     public void setup() {
         colorMode(HSB, 360, 100, 100);
         noStroke();
+        try {
+            LevelDataLoader loader = new LevelDataLoader("levels/test.lvl");
+        } catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
